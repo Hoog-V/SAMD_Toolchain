@@ -42,4 +42,4 @@ include_directories("${CMAKE_CURRENT_LIST_DIR}/cmsis-header-sam/samd21a/gcc/"
 					"${CMAKE_CURRENT_LIST_DIR}/CMSIS_5/CMSIS/Core/Include/"
 					"${CMAKE_CURRENT_LIST_DIR}/cmsis-header-sam/samd21a/include")
 
-add_library(CMSIS INTERFACE "${CMAKE_CURRENT_LIST_DIR}/gcc/system_samd21.c" "${CMAKE_CURRENT_LIST_DIR}/gcc/startup_samd21.c")
+add_library(CMSIS "${CMAKE_CURRENT_LIST_DIR}/gcc/system_samd21.c" "${CMAKE_CURRENT_LIST_DIR}/gcc/startup_samd21.c")
