@@ -15,6 +15,7 @@ set(MCPU cortex-m0plus)
 set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
 
 add_definitions(-D__SAMD21G18A__
+                -mcpu=${MCPU}
                 -fno-common 
                 -g3 
                 -gdwarf-4 
@@ -22,6 +23,7 @@ add_definitions(-D__SAMD21G18A__
                 -fmessage-length=0 
                 -fno-builtin 
                 -ffunction-sections 
+                -fno-strict-aliasing
                 -fdata-sections 
                 -fmerge-constants
                 -mapcs)
@@ -29,17 +31,18 @@ add_definitions(-D__SAMD21G18A__
 set(LINKER_SCRIPT ${CMAKE_CURRENT_LIST_DIR}/linker_script.ld)
 add_link_options(-T ${LINKER_SCRIPT}
                 -mthumb
+                -mthumb-interwork
                 -mcpu=${MCPU}
                 -specs=nano.specs 
                 -Wl,--gc-sections
-                --specs=nosys.specs
                 -Wl,--print-memory-usage
                 -lm
                 -Wl,-Map=${PROJECT_BINARY_DIR}/${PROJECT_NAME}.map)
 
 include_directories("${CMAKE_CURRENT_LIST_DIR}/cmsis-header-sam/samd21a/gcc/"
-					"${CMAKE_CURRENT_LIST_DIR}/cmsis-header-sam/samd21a/gcc/gcc/"
 					"${CMAKE_CURRENT_LIST_DIR}/CMSIS_5/CMSIS/Core/Include/"
 					"${CMAKE_CURRENT_LIST_DIR}/cmsis-header-sam/samd21a/include")
 
-add_library(CMSIS "${CMAKE_CURRENT_LIST_DIR}/gcc/system_samd21.c" "${CMAKE_CURRENT_LIST_DIR}/gcc/startup_samd21.c")
+
+set(STARTUP_SCRIPT_SOURCES "${CMAKE_CURRENT_LIST_DIR}/gcc/system_samd21.c" "${CMAKE_CURRENT_LIST_DIR}/gcc/startup_samd21.c")
+
