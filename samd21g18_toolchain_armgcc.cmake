@@ -1,5 +1,5 @@
 set(CMAKE_SYSTEM_NAME Generic)
-set(CMAKE_SYSTEM_PROCESSOR ARM)
+set(CMAKE_SYSTEM_PROCESSOR arm)
 if(${CMAKE_VERSION} VERSION_LESS "3.16.0")
     message(WARNING "Current CMake version is ${CMAKE_VERSION}. This toolchain requires CMake 3.16 or greater")
 
